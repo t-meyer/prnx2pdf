@@ -1,54 +1,54 @@
 # prnx2pdf
 
-Wandelt DevExpress-Dokumente (`.prnx`) in PDF um – **ohne** DevExpress-Lizenz oder das Programm, mit dem der Bericht erstellt wurde.
+Converts DevExpress documents (`.prnx`) to PDF – **without** a DevExpress license or the program that created the report.
 
-`.prnx`-Dateien entstehen, wenn man in einer Druckvorschau auf Basis von DevExpress XtraReports auf „Speichern“ klickt, z. B. in **ZUB Argos** (Wärmebrücken-Berichte). Ohne das Programm lassen sie sich normalerweise nicht öffnen.
+`.prnx` files are created when you click "Save" in a print preview based on DevExpress XtraReports, e.g. in **ZUB Argos** (thermal bridge reports). Without that program they usually can't be opened.
 
-## Benutzung (Windows, ohne Python)
+## Usage (Windows, no Python needed)
 
-1. `prnx2pdf.exe` unter [Releases](../../releases) herunterladen.
-2. Die `.prnx`-Datei mit der Maus **auf die `prnx2pdf.exe` ziehen**.
-3. Die PDF liegt danach im selben Ordner wie die `.prnx`-Datei (gleicher Name, Endung `.pdf`).
+1. Download `prnx2pdf.exe` from [Releases](../../releases).
+2. **Drag the `.prnx` file onto `prnx2pdf.exe`**.
+3. The PDF is saved next to the `.prnx` file (same name, `.pdf` extension).
 
-Wer die exe per Doppelklick startet, bekommt ein Fenster zur Dateiauswahl. Es können auch mehrere Dateien auf einmal umgewandelt werden.
+If you start the exe by double-clicking, a file selection dialog opens. Several files can be converted at once.
 
-> **Hinweis:** Beim ersten Start zeigt Windows möglicherweise „Der Computer wurde durch Windows geschützt“, weil die exe nicht signiert ist. Dann auf **„Weitere Informationen“ → „Trotzdem ausführen“** klicken.
+> **Note:** On first start Windows may show "Windows protected your PC" because the exe is not signed. Click **"More info" → "Run anyway"**.
 
-## Benutzung mit Python
+## Usage with Python
 
 ```bash
 pip install -r requirements.txt
-python prnx2pdf.py Bericht.prnx [weitere.prnx ...]
+python prnx2pdf.py report.prnx [more.prnx ...]
 ```
 
-## exe selbst bauen
+## Building the exe
 
 ```bash
 pip install reportlab pyinstaller
 pyinstaller --onefile --console --name prnx2pdf prnx2pdf.py
 ```
 
-Die exe liegt danach in `dist/`.
+The exe is created in `dist/`.
 
-## Was wird unterstützt?
+## What is supported?
 
-Eine `.prnx` ist eine gzip-komprimierte XML-Datei mit fertig gesetzten Seiten. Das Skript zeichnet diese Elemente nach:
+A `.prnx` file is gzip-compressed XML containing fully laid-out pages. The script redraws these elements:
 
-- Texte und Beschriftungen (Schrift, Größe, Ausrichtung, Zeilenumbruch)
-- Tabellen mit Rahmen und Hintergrundfarben
-- Linien
-- Bilder und Zeichnungen
-- Kopf- und Fußzeilen, Seitenzahlen, Inhaltsverzeichnis
+- Text and labels (font, size, alignment, line wrapping)
+- Tables with borders and background colors
+- Lines
+- Images and drawings
+- Headers and footers, page numbers, table of contents
 
-## Einschränkungen
+## Limitations
 
-- Getestet nur mit einem Bericht aus ZUB Argos 8 Pro (DevExpress 17.2). Andere Berichte können anders aussehen.
-- Die Textbreiten werden etwas anders berechnet als von DevExpress. An engen Stellen können Zahlen daher leicht überstehen oder anders umbrechen.
-- RichText-Felder werden nicht dargestellt.
-- Läuft nur unter Windows, weil die Schriften (Arial, Times New Roman) aus `C:\Windows\Fonts` geladen werden.
+- Only tested with one report from ZUB Argos 8 Pro (DevExpress 17.2). Other reports may look different.
+- Text widths are measured slightly differently than by DevExpress, so in tight cells numbers may overflow or wrap differently.
+- RichText fields are not rendered.
+- Windows only, because the fonts (Arial, Times New Roman) are loaded from the Windows fonts folder.
 
-Wer ein Originaldokument vollständig und exakt braucht, sollte es direkt im erzeugenden Programm als PDF exportieren oder über „Microsoft Print to PDF“ drucken.
+If you need an exact copy of the original, export it to PDF directly in the program that created it, or print it via "Microsoft Print to PDF".
 
-## Lizenz
+## License
 
-MIT – siehe [LICENSE](LICENSE).
+MIT – see [LICENSE](LICENSE).
