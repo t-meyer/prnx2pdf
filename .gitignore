@@ -1,0 +1,8 @@
+*.prnx
+*.pdf
+*.exe
+build/
+dist/
+*.spec
+__pycache__/
+.idea/
